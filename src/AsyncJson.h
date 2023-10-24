@@ -5,7 +5,7 @@
 
   Example of callback in use
 
-   server.on("/json", HTTP_ANY, [](AsyncWebServerRequest * request) {
+   server.on("/json", HTTP_ASYNC_ANY, [](AsyncWebServerRequest * request) {
 
     AsyncJsonResponse * response = new AsyncJsonResponse();
     JsonObject& root = response->getRoot();
@@ -185,10 +185,10 @@ protected:
 public:
 #ifdef ARDUINOJSON_5_COMPATIBILITY      
   AsyncCallbackJsonWebHandler(const String& uri, ArJsonRequestHandlerFunction onRequest) 
-  : _uri(uri), _method(HTTP_POST|HTTP_PUT|HTTP_PATCH), _onRequest(onRequest), _maxContentLength(16384) {}
+  : _uri(uri), _method(HTTP_ASYNC_POST|HTTP_ASYNC_PUT|HTTP_ASYNC_PATCH), _onRequest(onRequest), _maxContentLength(16384) {}
 #else
   AsyncCallbackJsonWebHandler(const String& uri, ArJsonRequestHandlerFunction onRequest, size_t maxJsonBufferSize=DYNAMIC_JSON_DOCUMENT_SIZE) 
-  : _uri(uri), _method(HTTP_POST|HTTP_PUT|HTTP_PATCH), _onRequest(onRequest), maxJsonBufferSize(maxJsonBufferSize), _maxContentLength(16384) {}
+  : _uri(uri), _method(HTTP_ASYNC_POST|HTTP_ASYNC_PUT|HTTP_ASYNC_PATCH), _onRequest(onRequest), maxJsonBufferSize(maxJsonBufferSize), _maxContentLength(16384) {}
 #endif
   
   void setMethod(WebRequestMethodComposite method){ _method = method; }
